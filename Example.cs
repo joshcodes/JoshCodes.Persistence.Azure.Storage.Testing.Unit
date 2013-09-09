@@ -2,7 +2,7 @@
 
 using Microsoft.WindowsAzure.StorageClient;
 
-namespace JoshCodes.Persistence.Azure.Sql.Testing.Unit
+namespace JoshCodes.Persistence.Azure.Storage.Testing.Unit
 {
     class Example : AzureObjectWrapper<Example.Entity>
     {
@@ -40,7 +40,7 @@ namespace JoshCodes.Persistence.Azure.Sql.Testing.Unit
         {
         }
 
-        public class Entity : TableServiceEntity
+        public class Entity : Storage.Entity
         {
             public int Int { get; set; }
             public double Double { get; set; }
@@ -66,7 +66,7 @@ namespace JoshCodes.Persistence.Azure.Sql.Testing.Unit
         {
             get
             {
-                return storage.Int;
+                return Storage.Int;
             }
         }
     }

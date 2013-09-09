@@ -4,7 +4,7 @@ using System.Threading;
 using Microsoft.WindowsAzure.StorageClient;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace JoshCodes.Persistence.Azure.Sql.Testing.Unit
+namespace JoshCodes.Persistence.Azure.Storage.Testing.Unit
 {
     [TestClass]
     public class Concurrency

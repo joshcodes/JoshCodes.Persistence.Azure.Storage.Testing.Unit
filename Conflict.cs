@@ -3,9 +3,9 @@
 using Microsoft.WindowsAzure.StorageClient;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using JoshCodes.Persistence.Azure.Sql.Extensions;
+using JoshCodes.Persistence.Azure.Storage.Extensions;
 
-namespace JoshCodes.Persistence.Azure.Sql.Testing.Unit
+namespace JoshCodes.Persistence.Azure.Storage.Testing.Unit
 {
     [TestClass]
     public class Conflict
