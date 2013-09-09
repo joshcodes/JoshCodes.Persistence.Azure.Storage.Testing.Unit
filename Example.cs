@@ -4,9 +4,14 @@ using Microsoft.WindowsAzure.StorageClient;
 
 namespace JoshCodes.Persistence.Azure.Storage.Testing.Unit
 {
-    class Example : AzureObjectWrapper<Example.Entity>
+    public class Example : AzureObjectWrapper<Example.Entity>
     {
         private const string EntityTableName = "ExampleTableTest";
+
+        public Example(CloudTableClient tableClient, Example.Entity storage)
+            : base(storage, tableClient, EntityTableName)
+        {
+        }
 
         public Example(CloudTableClient tableClient, string rowKey, string partitionKey)
             : base(tableClient, EntityTableName, new CreateEntity((out string pk, out string rk) =>
@@ -29,7 +34,9 @@ namespace JoshCodes.Persistence.Azure.Storage.Testing.Unit
                     Int = number,
                     Double = scalar,
                     String = text,
-                    Uri = uri
+                    Uri = uri,
+                    UpdatedAt = DateTime.Now,
+                    CreatedAt = DateTime.Now,
                 };
             }))
         {

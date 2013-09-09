@@ -10,9 +10,10 @@ namespace JoshCodes.Persistence.Azure.Storage.Testing.Unit
     public class Concurrency
     {
         [TestMethod]
+        [TestCategory("JoshCodes/Persistence/Azure/Storage")]
         public void BruteForce()
         {
-            var tableClient = JoshCodes.Persistence.Azure.Sql.Settings.StorageAccount().CreateCloudTableClient();
+            var tableClient = JoshCodes.Persistence.Azure.Storage.Settings.StorageAccount().CreateCloudTableClient();
             var entityWrapper1 = new Example(tableClient, Guid.NewGuid().ToString(), "ConcurrentModification");
             var entityWrapper2 = new Example.Store(tableClient).FindByUrn(entityWrapper1.IdUrn);
 
@@ -67,7 +68,7 @@ namespace JoshCodes.Persistence.Azure.Storage.Testing.Unit
         [TestMethod]
         public void DoesUpdate()
         {
-            var tableClient = JoshCodes.Persistence.Azure.Sql.Settings.StorageAccount().CreateCloudTableClient();
+            var tableClient = JoshCodes.Persistence.Azure.Storage.Settings.StorageAccount().CreateCloudTableClient();
             var entityWrapper = new Example(tableClient, Guid.NewGuid().ToString(), "ConcurrentModification", -1, 0.0, "foo", null);
 
             int currentValue;

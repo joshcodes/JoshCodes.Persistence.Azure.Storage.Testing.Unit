@@ -13,7 +13,7 @@ namespace JoshCodes.Persistence.Azure.Storage.Testing.Unit
         [TestMethod]
         public void Duplicate()
         {
-            var tableClient = JoshCodes.Persistence.Azure.Sql.Settings.StorageAccount().CreateCloudTableClient();
+            var tableClient = JoshCodes.Persistence.Azure.Storage.Settings.StorageAccount().CreateCloudTableClient();
             var key = Guid.NewGuid().ToString();
             var entityWrapper1 = new Example(tableClient, key, "Duplicate", -1, 0.0, "foo", null);
 
