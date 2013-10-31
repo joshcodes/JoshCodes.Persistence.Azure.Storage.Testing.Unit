@@ -16,26 +16,16 @@ namespace JoshCodes.Persistence.Azure.Storage.Testing.Unit
             return new Example(_tableClient, entity);
         }
 
-        public Example Create(string rowKey, string partitionKey)
+        public Example Create()
         {
-            var entity = new Example.Entity();
-            Create(entity, rowKey, partitionKey);
-            return new Example(_tableClient, entity);
+            return Create(Guid.NewGuid(), -1, 0.0, Guid.NewGuid().ToString(), null, Guid.Empty);
         }
 
-        public Example Create(string rowKey, string partitionKey,
-            int number, double scalar, string text, Uri uri)
+        public Example Create(Guid key,
+            int number, double scalar, string text, Uri uri, Guid guid)
         {
-            var entity = new Example.Entity()
-            {
-                    Int = number,
-                    Double = scalar,
-                    String = text,
-                    Uri = uri,
-                    UpdatedAt = DateTime.Now,
-                    CreatedAt = DateTime.Now,
-            };
-            Create(entity, rowKey, partitionKey);
+            var entity = new Example.Entity(key, DateTime.UtcNow, number, scalar, text, uri, guid);
+            Create(entity);
             return new Example(_tableClient, entity);
         }
     }

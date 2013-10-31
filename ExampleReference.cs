@@ -31,12 +31,10 @@ namespace JoshCodes.Persistence.Azure.Storage.Testing.Unit
             {
             }
 
-            public Entity(AzureObjectReference exampleIdRef, Guid idGuid, DateTime updatedAt, DateTime createdAt)
+            public Entity(AzureObjectReference exampleIdRef, Guid key, DateTime lastModified)
+                : base(key, lastModified)
             {
                 ExampleIdRef = Encode(exampleIdRef);
-                IdGuid = idGuid.ToString();
-                UpdatedAt = updatedAt;
-                CreatedAt = createdAt;
             }
 
             public AzureObjectReference GetExampleIdRef()
@@ -54,12 +52,10 @@ namespace JoshCodes.Persistence.Azure.Storage.Testing.Unit
 
             public ExampleReference Create(Example example)
             {
-                var rowKey = Guid.NewGuid().ToString();
-                var partitionKey = example.Int.ToString();
                 var idExample = example.GetAzureObjectReference<Example.Entity>();
-                var entity = new ExampleReference.Entity(idExample, Guid.NewGuid(), DateTime.Now, DateTime.Now);
+                var entity = new ExampleReference.Entity(idExample, Guid.NewGuid(), DateTime.Now);
 
-                Create(entity, rowKey, partitionKey);
+                Create(entity);
 
                 return new ExampleReference(entity, _tableClient);
             }

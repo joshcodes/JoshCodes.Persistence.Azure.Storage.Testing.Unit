@@ -14,7 +14,7 @@ namespace JoshCodes.Persistence.Azure.Storage
         {
             var tableClient = JoshCodes.Persistence.Azure.Storage.Settings.StorageAccount().CreateCloudTableClient();
             var exampleStore = new Testing.Unit.ExampleStore(tableClient);
-            var example = exampleStore.Create(Guid.NewGuid().ToString(), "ConcurrentModification", -1, 0.0, "foo", null);
+            var example = exampleStore.Create(Guid.NewGuid(), -1, 0.0, "ConcurrentModification", null, Guid.Empty);
             var exampleReferenceStore = new Testing.Unit.ExampleReference.Store(tableClient);
             var referencedExample = exampleReferenceStore.Create(example);
 
@@ -27,14 +27,14 @@ namespace JoshCodes.Persistence.Azure.Storage
         {
             var tableClient = JoshCodes.Persistence.Azure.Storage.Settings.StorageAccount().CreateCloudTableClient();
             var exampleStore = new Testing.Unit.ExampleStore(tableClient);
-            var example = exampleStore.Create(Guid.NewGuid().ToString(), "ConcurrentModification", -1, 0.0, "foo", null);
+            var example = exampleStore.Create(Guid.NewGuid(), -1, 0.0, "ConcurrentModification", null, Guid.Empty);
             var exampleReferenceStore = new Testing.Unit.ExampleReference.Store(tableClient);
             var referencedExample = exampleReferenceStore.Create(example);
 
             var referencingExamples = exampleReferenceStore.FindByExample(example);
             Assert.AreEqual(1, referencingExamples.Count());
             var referencedExampleFromQuery = referencingExamples.First();
-            Assert.AreEqual(referencedExample.IdGuid, referencedExampleFromQuery.IdGuid);
+            Assert.AreEqual(referencedExample.Key, referencedExampleFromQuery.Key);
         }
     }
 }

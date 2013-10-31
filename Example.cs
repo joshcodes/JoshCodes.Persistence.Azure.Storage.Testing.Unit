@@ -20,10 +20,25 @@ namespace JoshCodes.Persistence.Azure.Storage.Testing.Unit
 
         public class Entity : Storage.Entity
         {
+            public Entity()
+            {
+            }
+
+            public Entity(Guid key, DateTime lastModified, int i, double d, string s, Uri uri, Guid g)
+                : base(key, lastModified)
+            {
+                this.Int = i;
+                this.Double = d;
+                this.String = s;
+                this.Uri = uri;
+                this.guid = g;
+            }
+
             public int Int { get; set; }
             public double Double { get; set; }
             public string String { get; set; }
             public Uri Uri { get; set; }
+            public Guid guid { get; set; }
         }
 
         public bool ChangeIntAtomic(int requiredValue, int newValue, out int currentValue)

@@ -15,8 +15,8 @@ namespace JoshCodes.Persistence.Azure.Storage.Testing.Unit
         {
             var tableClient = JoshCodes.Persistence.Azure.Storage.Settings.StorageAccount().CreateCloudTableClient();
             var entityStore = new ExampleStore(tableClient);
-            var entityWrapper1 = entityStore.Create(Guid.NewGuid().ToString(), "ConcurrentModification", 0, 0.0, "foo", null);
-            var entityWrapper2 = (Example)entityStore.FindByUrn(entityWrapper1.IdUrn);
+            var entityWrapper1 = entityStore.Create(Guid.NewGuid(), 0, 0.0, "ConcurrentModification", null, Guid.Empty);
+            var entityWrapper2 = (Example)entityStore.Find(entityWrapper1.Key);
 
             int totalMods = 0;
 
@@ -71,11 +71,10 @@ namespace JoshCodes.Persistence.Azure.Storage.Testing.Unit
         {
             var tableClient = JoshCodes.Persistence.Azure.Storage.Settings.StorageAccount().CreateCloudTableClient();
             var entityStore = new ExampleStore(tableClient);
-            var key = Guid.NewGuid().ToString();
-            var entityWrapper = entityStore.Create(key, "Duplicate", -1, 0.0, "foo", null);
+            var entityWrapper = entityStore.Create();
 
             int currentValue;
-            entityWrapper.ChangeIntAtomic(-1, 0, out currentValue);
+            entityWrapper.ChangeIntAtomic(entityWrapper.Int, 0, out currentValue);
             Assert.AreEqual(0, currentValue);
             Assert.AreEqual(0, entityWrapper.Int);
 
