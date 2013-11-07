@@ -55,6 +55,14 @@ namespace JoshCodes.Persistence.Azure.Storage.Testing.Unit
             }
         }
 
+        public void Update(int newInt)
+        {
+            this.EditableStorage((entity) =>
+                {
+                    entity.Int = newInt;
+                    return true;
+                });
+        }
 
         public DateTime UpdatedAt
         {

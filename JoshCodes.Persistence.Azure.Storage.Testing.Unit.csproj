@@ -62,6 +62,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReferenceTests.cs" />
     <Compile Include="UniquenessTests.cs" />
+    <Compile Include="MutationsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
