@@ -63,6 +63,7 @@
     <Compile Include="ReferenceTests.cs" />
     <Compile Include="UniquenessTests.cs" />
     <Compile Include="MutationsTests.cs" />
+    <Compile Include="KvpTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
